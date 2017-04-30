@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/WebApplication3">
+    <Resource name="jdbc/confluence" auth="Container" type="javax.sql.DataSource"
+          username="postgres"
+          password="admin"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/agenda_pediatrica"
+          maxTotal="60"
+          maxIdle="20"
+          validationQuery="select 1" />
+</Context>
+
+
+
