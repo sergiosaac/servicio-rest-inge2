@@ -99,4 +99,5 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return em;
     }
     
+    
 }
