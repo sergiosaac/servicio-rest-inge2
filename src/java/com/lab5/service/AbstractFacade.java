@@ -5,9 +5,12 @@
  */
 package com.lab5.service;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 import javax.persistence.EntityManager;
-
+import javax.persistence.Query;
+import org.json.simple.JSONObject;
 /**
  *
  * @author Usuario
@@ -60,5 +63,25 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
+    public String validarUsuario(String email) throws IOException {
+        
+        JSONObject obj = new JSONObject();
+ 
+        boolean valido = getEntityManager().createNativeQuery("SELECT * FROM Usuario u WHERE u.correo = '" + email + "'")
+                .getResultList().isEmpty();
+        if (valido) {
+            
+            obj.put("usuarioValido", false);            
+        } else {
+            obj.put("usuarioValido", true);
+        }
+        
+        StringWriter out = new StringWriter();
+        obj.writeJSONString(out);
+      
+        String jsonText = out.toString();
+        
+        return jsonText;   
+    }
 }
