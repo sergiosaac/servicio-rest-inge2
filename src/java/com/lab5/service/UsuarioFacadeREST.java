@@ -107,10 +107,10 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 //        return super.validarUsuario(email);
 //    }
     @POST
+    @Consumes({MediaType.APPLICATION_JSON})
     @Path("validarUsuario")
     @Produces({MediaType.APPLICATION_JSON})
-    public String findMail(@FormParam("email") String email) throws IOException {
-        
+    public String findMail(String email) throws IOException {
         return super.validarUsuario(email);
     }
 
