@@ -6,14 +6,20 @@
 package com.lab5;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,13 +37,18 @@ public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private Integer idUsuario;
+    @Size(max = 32)
     @Column(name = "nombre")
     private String nombre;
+    @Size(max = 32)
     @Column(name = "correo")
     private String correo;
+    @OneToMany(mappedBy = "idPadre")
+    private Collection<Hijo> hijoCollection;
 
     public Usuario() {
     }
@@ -68,6 +79,15 @@ public class Usuario implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    @XmlTransient
+    public Collection<Hijo> getHijoCollection() {
+        return hijoCollection;
+    }
+
+    public void setHijoCollection(Collection<Hijo> hijoCollection) {
+        this.hijoCollection = hijoCollection;
     }
 
     @Override

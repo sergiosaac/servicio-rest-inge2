@@ -7,14 +7,13 @@ package com.lab5.service;
 
 import com.lab5.Usuario;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -22,14 +21,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Usuario
  */
-@javax.ejb.Stateless
-@Path("service")
+@Stateless
+@Path("usuario")
 public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
     //@PersistenceContext(unitName = "WebApplication3PU")
@@ -72,14 +70,15 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     public List<Usuario> findAll() {
         return super.findAll();
     }
-
-//    @POST
+    
+    //    @POST
 //    @Path("getUserByEmail")
 //    @Consumes({MediaType.APPLICATION_JSON})
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public Usuario findUserByEmail(String email) {
 //        return super.findAll();
 //    }
+
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -99,13 +98,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         em = Persistence.createEntityManagerFactory("WebApplication3PU").createEntityManager();
         return em;
     }
-
+    
 //    @GET
 //    @Path("validarUsuario/{email}")
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public String findMail(@PathParam("email") String email) {
 //        return super.validarUsuario(email);
 //    }
+    
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("validarUsuario")
@@ -113,5 +113,4 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     public String findMail(String email) throws IOException {
         return super.validarUsuario(email);
     }
-
 }
