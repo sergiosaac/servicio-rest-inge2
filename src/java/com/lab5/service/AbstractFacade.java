@@ -11,6 +11,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Usuario
@@ -64,24 +67,32 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public String validarUsuario(String email) throws IOException {
-        
+    public String validarUsuario(String email) throws IOException, ParseException {
+
         JSONObject obj = new JSONObject();
- 
-        boolean valido = getEntityManager().createNativeQuery("SELECT * FROM Usuario u WHERE u.correo = '" + email + "'")
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(email);
+
+        JSONObject jsonObject = (JSONObject) json;
+        String emailConsulta = (String) jsonObject.get("email");
+        
+        boolean valido = getEntityManager().createNativeQuery("SELECT * FROM Usuario u WHERE u.correo = '" + emailConsulta + "'")
                 .getResultList().isEmpty();
         if (valido) {
+
+            obj.put("usuarioValido", false);
             
-            obj.put("usuarioValido", false);            
         } else {
             obj.put("usuarioValido", true);
+            
         }
-        
+
         StringWriter out = new StringWriter();
         obj.writeJSONString(out);
-      
+
         String jsonText = out.toString();
-        
-        return jsonText;   
+
+        return jsonText;
     }
 }
