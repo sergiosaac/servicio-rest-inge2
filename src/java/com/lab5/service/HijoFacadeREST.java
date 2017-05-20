@@ -90,4 +90,11 @@ public class HijoFacadeREST extends AbstractFacade<Hijo> {
         return em;
     }
     
+    @GET
+    @Path("hijos/{idPadre}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String obtenerHijos(@PathParam("idPadre") Integer idPadre) {
+        return super.obtenerHijos(idPadre);
+    }
+    
 }

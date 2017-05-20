@@ -5,6 +5,8 @@
  */
 package com.lab5.service;
 
+import com.lab5.Hijo;
+import com.lab5.Usuario;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
@@ -94,5 +96,11 @@ public abstract class AbstractFacade<T> {
         String jsonText = out.toString();
 
         return jsonText;
+    }
+    
+    public String obtenerHijos(Integer idPadre) {
+          
+        return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM hijo c WHERE c.id_padre = '"+idPadre+"'")
+                .getResultList().toString();
     }
 }
