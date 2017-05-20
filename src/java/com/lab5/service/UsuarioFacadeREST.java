@@ -21,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -110,7 +111,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("validarUsuario")
     @Produces({MediaType.APPLICATION_JSON})
-    public String findMail(String email) throws IOException {
+    public String findMail(String email) throws IOException, ParseException {
         return super.validarUsuario(email);
     }
 }
