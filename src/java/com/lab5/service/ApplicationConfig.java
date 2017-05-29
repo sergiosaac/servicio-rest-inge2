@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.lab5.service.HijoFacadeREST.class);
         resources.add(com.lab5.service.UsuarioFacadeREST.class);
+        resources.add(com.lab5.service.VacunaFacadeREST.class);
     }
     
 }

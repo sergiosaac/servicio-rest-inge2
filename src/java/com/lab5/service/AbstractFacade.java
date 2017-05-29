@@ -103,4 +103,10 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM hijo c WHERE c.id_padre = '"+idPadre+"'")
                 .getResultList().toString();
     }
+    
+    public String obtenerVacunas(Integer idHijo) {
+          
+        return getEntityManager().createNativeQuery("SELECT to_json(v.*) FROM vacuna v WHERE v.id_hijo = '"+idHijo+"'")
+                .getResultList().toString();
+    }
 }

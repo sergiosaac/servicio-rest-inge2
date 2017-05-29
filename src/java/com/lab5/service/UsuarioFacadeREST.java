@@ -71,14 +71,6 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     public List<Usuario> findAll() {
         return super.findAll();
     }
-    
-    //    @POST
-//    @Path("getUserByEmail")
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Usuario findUserByEmail(String email) {
-//        return super.findAll();
-//    }
 
     @GET
     @Path("{from}/{to}")
@@ -100,7 +92,8 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return em;
     }
     
-//    @GET
+    
+    //    @GET
 //    @Path("validarUsuario/{email}")
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public String findMail(@PathParam("email") String email) {
@@ -114,4 +107,5 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     public String findMail(String email) throws IOException, ParseException {
         return super.validarUsuario(email);
     }
+    
 }
