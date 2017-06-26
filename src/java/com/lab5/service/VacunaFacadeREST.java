@@ -6,6 +6,7 @@
 package com.lab5.service;
 
 import com.lab5.Vacuna;
+import java.io.IOException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -95,6 +97,14 @@ public class VacunaFacadeREST extends AbstractFacade<Vacuna> {
     @Produces({MediaType.APPLICATION_JSON})
     public String obtenerVacunas(@PathParam("idHijo") Integer idHijo) {
         return super.obtenerVacunas(idHijo);
+    }
+    
+     @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("obtenerVacunasPost")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String findMail(String hijo) throws IOException, ParseException {
+        return super.obtenerVacunasPost(hijo);
     }
     
     

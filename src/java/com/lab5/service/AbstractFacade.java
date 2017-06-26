@@ -85,18 +85,25 @@ public abstract class AbstractFacade<T> {
         String nombre = getEntityManager().createNativeQuery("SELECT nombre FROM Usuario u WHERE u.correo = '" + emailConsulta + "'")
                 .getResultList().toString();
         
+        String id = getEntityManager().createNativeQuery("SELECT id_usuario FROM Usuario u WHERE u.correo = '" + emailConsulta + "'")
+                .getResultList().toString();
+        
         String nombreParaObjeto = nombre.substring(1,nombre.length()-1);
+        
+        String idParaObjeto = id.substring(1,2);
         
         if (valido) {
 
             obj.put("valido", false);
             obj.put("email", emailConsulta);
             obj.put("nombre", nombreParaObjeto);
+            obj.put("idUsuario", idParaObjeto);
             
         } else {
             obj.put("valido", true);
             obj.put("email", emailConsulta);
             obj.put("nombre", nombreParaObjeto);
+            obj.put("idUsuario", idParaObjeto);
             
         }
 
@@ -119,4 +126,37 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createNativeQuery("SELECT to_json(v.*) FROM vacuna v WHERE v.id_hijo = '"+idHijo+"'")
                 .getResultList().toString();
     }
+    
+    public String obtenerHijosPost(String email) throws IOException, ParseException {
+
+        JSONObject obj = new JSONObject();
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(email);
+
+        JSONObject jsonObject = (JSONObject) json;
+        String idPadre = (String) jsonObject.get("idPadre");
+        
+        
+        return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM hijo c WHERE c.id_padre = '"+idPadre+"'")
+                .getResultList().toString();
+
+    }
+    
+    public String obtenerVacunasPost(String email) throws IOException, ParseException {
+
+        JSONObject obj = new JSONObject();
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(email);
+
+        JSONObject jsonObject = (JSONObject) json;
+        String idHijo = (String) jsonObject.get("idHijo");
+        
+        return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM vacuna c WHERE c.id_hijo = '"+idHijo+"'")
+                .getResultList().toString();
+
+    }
+    
+    
 }

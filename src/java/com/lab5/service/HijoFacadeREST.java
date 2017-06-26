@@ -6,6 +6,7 @@
 package com.lab5.service;
 
 import com.lab5.Hijo;
+import java.io.IOException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -94,6 +96,15 @@ public class HijoFacadeREST extends AbstractFacade<Hijo> {
     @Produces({MediaType.APPLICATION_JSON})
     public String obtenerHijos(@PathParam("idPadre") Integer idPadre) {
         return super.obtenerHijos(idPadre);
+    }
+    
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("obtenerHijosPost")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String findMail(String padre) throws IOException, ParseException {
+        return super.obtenerHijosPost(padre);
     }
     
 }
