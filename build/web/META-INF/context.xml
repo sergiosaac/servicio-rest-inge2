@@ -2,7 +2,7 @@
 <Context antiJARLocking="true" path="/WebApplication3">
     <Resource name="jdbc/confluence" auth="Container" type="javax.sql.DataSource"
           username="postgres"
-          password="admin"
+          password="root"
           driverClassName="org.postgresql.Driver"
           url="jdbc:postgresql://localhost:5432/agenda_pediatrica"
           maxTotal="60"

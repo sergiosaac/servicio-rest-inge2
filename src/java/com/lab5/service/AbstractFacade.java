@@ -81,12 +81,22 @@ public abstract class AbstractFacade<T> {
         
         boolean valido = getEntityManager().createNativeQuery("SELECT * FROM Usuario u WHERE u.correo = '" + emailConsulta + "'")
                 .getResultList().isEmpty();
+        
+        String nombre = getEntityManager().createNativeQuery("SELECT nombre FROM Usuario u WHERE u.correo = '" + emailConsulta + "'")
+                .getResultList().toString();
+        
+        String nombreParaObjeto = nombre.substring(1,nombre.length()-1);
+        
         if (valido) {
 
-            obj.put("usuarioValido", false);
+            obj.put("valido", false);
+            obj.put("email", emailConsulta);
+            obj.put("nombre", nombreParaObjeto);
             
         } else {
-            obj.put("usuarioValido", true);
+            obj.put("valido", true);
+            obj.put("email", emailConsulta);
+            obj.put("nombre", nombreParaObjeto);
             
         }
 
