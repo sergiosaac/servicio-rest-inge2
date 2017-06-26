@@ -152,8 +152,9 @@ public abstract class AbstractFacade<T> {
 
         JSONObject jsonObject = (JSONObject) json;
         String idHijo = (String) jsonObject.get("idHijo");
+        String order = (String) jsonObject.get("order");
         
-        return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM vacuna c WHERE c.id_hijo = '"+idHijo+"'")
+        return getEntityManager().createNativeQuery("SELECT to_json(c.*) FROM vacuna c WHERE c.id_hijo = '"+idHijo+"' ORDER BY "+order+" asc")
                 .getResultList().toString();
 
     }
